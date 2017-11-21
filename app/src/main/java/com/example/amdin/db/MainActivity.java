@@ -1,5 +1,4 @@
 package com.example.amdin.db;
-
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -41,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         myRef = FirebaseDatabase.getInstance().getReference("users");
         Query contacts=myRef.orderByChild("name").limitToFirst(10);
-
-
+        btn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                submitPost();
+            }
+        });
         contacts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -57,14 +58,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 showText.setText(add);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+            }        });
     }
-
     public void submitPost() {
         final String name = editName.getText().toString();
         final String phone = editPhone.getText().toString();
@@ -72,21 +69,11 @@ public class MainActivity extends AppCompatActivity {
         myRef.child(key).child("name").setValue(name);
         myRef.child(key).child("phone").setValue(phone);
         Toast.makeText(getApplicationContext(), "post Success", Toast.LENGTH_SHORT).show();
-
     }
-
-
-
-
-
-
-
-
     public void onBackPressed(){
         mAuth.signOut();
 
         Toast.makeText(getApplicationContext(),"Sign out",Toast.LENGTH_SHORT).show();
         finish();
     }
-
 }

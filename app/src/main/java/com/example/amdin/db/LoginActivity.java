@@ -1,5 +1,4 @@
 package com.example.amdin.db;
-
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +16,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.storage.FirebaseStorage;
-
 public class LoginActivity extends AppCompatActivity {
     private final static String TAG = "LoginActivity";
     private FirebaseAuth mAuth;
@@ -34,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(TAG, "Key: " + key + " Value: " + value);
             }
         }
-
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "InstanceID token: " + token);
 
@@ -59,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
     }
-
     public void onButtonLogin(View v) {
         String email = ((EditText)findViewById(R.id.editEmail)).getText().toString();
         String password = ((EditText)findViewById(R.id.editPassword)).getText().toString();
@@ -77,12 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-
                         // ...
                     }
                 });
     }
-
     @Override
     public void onStart() {
         super.onStart();

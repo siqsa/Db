@@ -69,9 +69,8 @@ public class MainActivity extends AppCompatActivity {
         final String name = editName.getText().toString();
         final String phone = editPhone.getText().toString();
         final String key = myRef.push().getKey();
-        HashMap<String,Object> postValues=new HashMap<>();
-        postValues.put(name,phone);
-        myRef.child(key).setValue(postValues);
+        myRef.child(key).child("name").setValue(name);
+        myRef.child(key).child("phone").setValue(phone);
         Toast.makeText(getApplicationContext(), "post Success", Toast.LENGTH_SHORT).show();
 
     }
